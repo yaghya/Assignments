@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="src/frodo2/algorithms/XCSPschema.xsd">
+  <presentation name="Combinatorial Auction Problem" maxConstraintArity="3" maximize="true" format="XCSP 2.1_FRODO" />
+  <agents nbAgents="3">
+    <agent name="Bidder_1" />
+    <agent name="Bidder_2" />
+    <agent name="Bidder_3" />
+  </agents>
+  <domains nbDomains="1">
+    <domain name="binary" nbValues="2">0..1</domain>
+  </domains>
+  <variables nbVariables="6">
+    <variable name="b0" domain="binary" agent="Bidder_1" />
+    <variable name="b1" domain="binary" agent="Bidder_1" />
+    <variable name="b2" domain="binary" agent="Bidder_2" />
+    <variable name="b3" domain="binary" agent="Bidder_2" />
+    <variable name="b4" domain="binary" agent="Bidder_3" />
+    <variable name="b5" domain="binary" agent="Bidder_3" />
+  </variables>
+  <relations nbRelations="9">
+    <relation name="SUM1" arity="1" nbTuples="2" semantics="soft" defaultCost="-infinity">0: 0|1</relation>
+    <relation name="SUM2" arity="2" nbTuples="3" semantics="soft" defaultCost="-infinity">0: 0 0|1 0|0 1</relation>
+    <relation name="SUM3" arity="3" nbTuples="4" semantics="soft" defaultCost="-infinity">0: 0 0 0|1 0 0|0 1 0|0 0 1</relation>
+    <relation name="Bid_0_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">90: 1</relation>
+    <relation name="Bid_1_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">110: 1</relation>
+    <relation name="Bid_2_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">60: 1</relation>
+    <relation name="Bid_3_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">120: 1</relation>
+    <relation name="Bid_4_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">160: 1</relation>
+    <relation name="Bid_5_Utility_Rel" arity="1" nbTuples="1" semantics="soft" defaultCost="0">120: 1</relation>
+  </relations>
+  <constraints nbConstraints="11">
+    <constraint name="Bid_0_Utility" arity="1" scope="b0" reference="Bid_0_Utility_Rel" />
+    <constraint name="Bid_1_Utility" arity="1" scope="b1" reference="Bid_1_Utility_Rel" />
+    <constraint name="Bid_2_Utility" arity="1" scope="b2" reference="Bid_2_Utility_Rel" />
+    <constraint name="Bid_3_Utility" arity="1" scope="b3" reference="Bid_3_Utility_Rel" />
+    <constraint name="Bid_4_Utility" arity="1" scope="b4" reference="Bid_4_Utility_Rel" />
+    <constraint name="Bid_5_Utility" arity="1" scope="b5" reference="Bid_5_Utility_Rel" />
+    <constraint name="g1capacity" arity="3" scope="b1 b3 b5" reference="SUM3" />
+    <constraint name="g2capacity" arity="3" scope="b0 b2 b4" reference="SUM3" />
+    <constraint name="B1budget" arity="2" scope="b0 b1" reference="SUM2" />
+    <constraint name="B2budget" arity="2" scope="b2 b3" reference="SUM2" />
+    <constraint name="B3budget" arity="2" scope="b4 b5" reference="SUM2" />
+  </constraints>
+</instance>
