@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<limits.h>
-/*Declaring heap globally so that we do not need to pass it as an argument every time*/
+/*Declaring heap globally that we do not need to pass it as an argument every time*/
 /* Heap used here is Min Heap */
 int heap[1000000],heapSize;
 /*Initialize Heap*/
